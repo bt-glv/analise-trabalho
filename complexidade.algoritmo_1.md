@@ -1,52 +1,50 @@
-local function parede_gerar(inicio_pos, fim_pos, porta_posicao)
-    local output = {}        -- O(1)
-    local contador = 1      -- O(1)
 
-    for i = inicio_pos, fim_pos do -- O(1) x (n - i) = O(n)
-        if i == porta_posicao then -- O(1)
-            output[contador] = 1   --O(1)
-        else
-            output[contador] = 0   --O(1)
-        end
-        contador = contador + 1  --O(1)
-    end
 
-    return output
-end
+# Função "parede_gerar()"
 
--- Complexidade = O(n)
+Essa função cria uma tabela (vetor) output com valores 0 e 1, dependendo se a posição atual é igual à porta_posicao.
 
--- —————————————————————————————————————————————————————————
-local function parede_encontrar_saida(parede, ponto_entrada)
-    local function explorar(_parede, posicao_inicial, direcao, distancia)
-        if posicao_inicial == nil or _parede[posicao_inicial] == nil then return false, nil end -- O(1)
+1. Loop for i = inicio_pos, fim_pos
 
-        local explorar_ate = (posicao_inicial + (distancia * direcao)) -- O(1)
+- Executa n vezes: O(n)
+- Cada iteração do loop realiza uma comparação (i == porta_posicao), uma atribuição e um incremento.
+- Cada operação dentro do loop é de complexidade igual à O(1);
 
-        for i = posicao_inicial, explorar_ate, direcao do -- O(1) x (n - i) = O(1) x O(n) = O(n)
-            if _parede[i] == nil then return false, nil end --O(1)
-            if _parede[i] == 1 then return true, i end -- O(1)
-        end
+## Conclusão
+Complexidade: </br>
+O(n)
 
-        return false, explorar_ate
-    end
 
-    local distancia_exploracao = 20 -- O(1)
-    local ex_direita = ponto_entrada -- O(1)
-    local ex_esquerda = ponto_entrada -- O(1)
+# Função "parede_encontrar_saida()"
 
-    local encontrado = false -- O(1)
+Esta função busca a porta no vetor parede começando a partir de ponto_entrada. 
+A busca é feita tanto para a esquerda quanto para a direita, e é repetida n vezes devido ao loop externo.
 
-    while not encontrado do
-        encontrado, ex_direita = explorar(parede, ex_direita, 1, distancia_exploracao) -- O(1)
-        if encontrado then return ex_direita end -- O(1)
+1. Loop for tentativa == 1, n:
 
-        encontrado, ex_esquerda = explorar(parede, ex_esquerda, -1, distancia_exploracao) -- O(1)
-        if encontrado then return ex_esquerda end -- O(1)
-    end
-end
+- Executa n vezes;
+- Dentro desse loop, há um while, que processa as buscas tanto para a esquerda quanto para a direita;
 
--- Complexidade = O(n)
--- ———————————————————————————————————————————————————————————
 
--- Complexidade Total Código = O(n) x O(n) = O(n^2);
+2. Loop while esquerda >= 1 or direita <= n:
+
+- Em cada iteração da tentativa, o loop while percorre no máximo n elementos:
+- Busca para a esquerda até o início do vetor.
+- Busca para a direita até o final do vetor.
+- Cada iteração realiza no máximo 2 comparações e 2 operações de atribuição.
+
+
+3. Em cada tentativa, o custo do loop while é proporcional a  O(n). 
+O loop externo multiplica esse custo por n.
+
+- Custo do while para cada tentativa é O(n).
+- Custo do for é n * O(n) = O(n^2)
+
+
+## Conclusão
+Complexidade: </br>
+O(n) + O(n^2) = O(n^2)
+
+# Complexidade Total
+Complexidade Total(parede_gerar + parede_encontrar_saida): </br>
+O(n) + O(n^2) = O(n^2)

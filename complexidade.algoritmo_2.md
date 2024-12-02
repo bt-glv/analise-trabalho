@@ -1,50 +1,41 @@
 
-
 # Função "parede_gerar()"
 
-Essa função cria uma tabela (vetor) output com valores 0 e 1, dependendo se a posição atual é igual à porta_posicao.
+- O loop `for i = inicio_pos, fim_pos` percorre n iterações, onde `n = fim_pos - inicio_pos + 1` (n - 1)
 
-1. Loop for i = inicio_pos, fim_pos
+#### Para cada iteração:
 
-- Executa n vezes: O(n)
-- Cada iteração do loop realiza uma comparação (i == porta_posicao), uma atribuição e um incremento.
-- Cada operação dentro do loop é de complexidade igual à O(1);
+`if i == porta_posicao `
+> O(1)
+
+`output[contador] = 1`
+> O(1)
+
+`contador = contador + 1`
+> O(1)
 
 ## Conclusão
 Complexidade: </br>
-O(n)
+O(1) + (n - 1) = O(n);
 
 
 # Função "parede_encontrar_saida()"
 
-Esta função busca a porta no vetor parede começando a partir de ponto_entrada. 
-A busca é feita tanto para a esquerda quanto para a direita, e é repetida n vezes devido ao loop externo.
+`while esquerda >= 1 or direita <= n:`
 
-1. Loop for tentativa == 1, n:
+- Em cada iteração, as variáveis esquerda e direita são ajustadas para expandir a busca.
 
-- Executa n vezes;
-- Dentro desse loop, há um while, que processa as buscas tanto para a esquerda quanto para a direita;
+#### A cada ajuste:
+1. A verificação parede[esquerda] == 1 (ou similar para direita) é O(1).
+2. O ajuste das variáveis esquerda e direita é O(1).
+3. O loop é executado até que os dois limites sejam atingidos.
 
+#### Pior caso:
+A busca pode percorrer todos os elementos da lista parede (n elementos no total), 
+verificando cada posição uma vez. </br> </br>
 
-2. Loop while esquerda >= 1 or direita <= n:
-
-- Em cada iteração da tentativa, o loop while percorre no máximo n elementos:
-- Busca para a esquerda até o início do vetor.
-- Busca para a direita até o final do vetor.
-- Cada iteração realiza no máximo 2 comparações e 2 operações de atribuição.
-
-
-3. Em cada tentativa, o custo do loop while é proporcional a  O(n). 
-O loop externo multiplica esse custo por n.
-
-- Custo do while para cada tentativa é O(n).
-- Custo do for é n * O(n) = O(n^2)
-
+Isso ocorre se a porta estiver na extremidade oposta ao ponto_entrada ou se não houver porta válida (caso hipotético, já que há garantia de uma).
 
 ## Conclusão
 Complexidade: </br>
-O(n) + O(n^2) = O(n^2)
-
-# Complexidade Total
-Complexidade Total(parede_gerar + parede_encontrar_saida): </br>
-O(n) + O(n^2) = O(n^2)
+O(n) + O(n) = O(n)
