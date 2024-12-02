@@ -1,9 +1,9 @@
 
 # Analise De Algoritmos 
-## Trabalho Autoinstrucional
+### Trabalho Autoinstrucional
+<br>
 
-<br><br>
-### Participantes
+## Participantes
 - Bruno Teles Galvão
 - Igor Gabriel Primo Barbosa
 
