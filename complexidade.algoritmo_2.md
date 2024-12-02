@@ -16,7 +16,7 @@
 
 ## Conclusão
 Complexidade: </br>
-O(1) + (n - 1) = O(n);
+O(1) * (n - 1) = O(n);
 
 
 # Função "parede_encontrar_saida()"
